@@ -1,0 +1,465 @@
+\documentclass{beamer}
+\usetheme{default}
+\useoutertheme{miniframes}
+\useinnertheme{circles}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{bookmark}
+\usepackage{url}
+
+% =============================================
+% COLOR SCHEME: Professional Navy
+% =============================================
+\definecolor{NavyDark}{RGB}{20, 40, 80}        % Deep navy
+\definecolor{NavyMid}{RGB}{40, 65, 115}        % Medium navy
+\definecolor{NavyLight}{RGB}{70, 100, 150}     % Lighter navy accent
+
+% Set the main structure color
+\setbeamercolor{structure}{fg=NavyDark}
+
+% Header (top navigation bar)
+\setbeamercolor{section in head/foot}{fg=white, bg=NavyDark}
+\setbeamercolor{subsection in head/foot}{fg=white, bg=NavyMid}
+
+% Footer colors (subtle gradient)
+\setbeamercolor{author in head/foot}{fg=white, bg=NavyLight}
+\setbeamercolor{title in head/foot}{fg=white, bg=NavyMid}
+\setbeamercolor{date in head/foot}{fg=white, bg=NavyDark}
+
+% Title page
+\setbeamercolor{title}{fg=NavyDark}
+\setbeamercolor{subtitle}{fg=NavyMid}
+\setbeamercolor{author}{fg=NavyDark!80}
+\setbeamercolor{date}{fg=NavyDark!60}
+
+% Frame titles
+\setbeamercolor{frametitle}{fg=white, bg=NavyDark}
+\setbeamercolor{framesubtitle}{fg=NavyMid}
+
+% Itemize/enumerate colors
+\setbeamercolor{item}{fg=NavyDark}
+\setbeamercolor{subitem}{fg=NavyMid}
+
+% Navigation dots
+\setbeamercolor{mini frame}{fg=white, bg=white!30}
+\setbeamercolor{mini frame inactive}{fg=white!50}
+
+% Custom footline: Author | Short Title | Date + Frame Number
+\setbeamertemplate{footline}{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.20\paperwidth,ht=2.5ex,dp=1ex,left,leftskip=1em]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.55\paperwidth,ht=2.5ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.5ex,dp=1ex,right,rightskip=1em]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
+    \insertframenumber{} / \inserttotalframenumber
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+% Code listing style
+\lstset{
+    basicstyle=\ttfamily\footnotesize,
+    breaklines=true,
+    frame=single,
+    backgroundcolor=\color{gray!10},
+}
+
+\title[Systems Thinking Workshop Series 1: Experiment Tracking]{Systems Thinking for Better Science: \\ \textbf{Experiment Tracking Workshop}}
+\subtitle{\textbf{How to make your experiments reproducible and shareable}}
+\author[Sneha \& Adish]{\textbf{Sneha \& Adish}}
+\date[Dec 18, 2025]{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Workshop Series: Systems Thinking for Better Science}
+    \textbf{Four Sessions Building on Each Other:}
+    
+    \vspace{0.5em}
+    \begin{enumerate}
+        \item \textbf{Session 1 - Experiment Tracking (Today)} \\
+        {\small Git workflows, reproducibility, why it matters}
+        
+        \item \textbf{Session 2 - Documentation Best Practices (Tentative: Jan 2026)} \\
+        {\small Guides vs references, auto-generation, publishing}
+        
+        \item \textbf{Session 3 - Advanced Experiment Tracking (Tentative: Jan 2026)} \\
+        {\small Branching, migration, complex workflows}
+        
+        \item \textbf{Session 4 - Linear Integration (Tentative: Feb 2026)} \\
+        {\small Connecting experiments to team planning}
+    \end{enumerate}
+    
+    \vspace{0.5em}
+    \textit{Each session will build on the previous. The intention is to level up progressively.}
+\end{frame}
+
+
+% ============================================
+% SECTION 1: HOOK
+% ============================================
+\section{Hook}
+
+
+
+\begin{frame}{Quick Question}
+\Large
+Raise your hand if you've experienced any of the following:
+\vspace{1em}
+
+\begin{itemize}
+    \item You've lost work or can't reproduce previous results
+    \pause
+    \item Colleague asks to reproduce your analysis - you have an idea of what you did but can't remember exactly.
+    \pause
+    \item Broke something and wished for an undo button.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{These Aren't Just Frustrations}
+\Large
+They're symptoms of \textbf{missing systems}
+
+\vspace{2em}
+
+\normalsize
+Good news: We can fix this.
+\end{frame}
+
+\begin{frame}{Today's Journey}
+\begin{enumerate}
+    \item Watch a live experiment workflow
+    \item Extract the principles that make it work
+    \item Get tools to implement it yourself
+    \item See the path to team-wide adoption (March 2026)
+\end{enumerate}
+\end{frame}
+
+% ============================================
+% SECTION 2: DEMO SETUP
+% ============================================
+\section{Demo}
+
+\begin{frame}[fragile]{Let's Start an Experiment}
+    \Large
+    Live demo time!
+    
+    \vspace{1em}
+    \normalsize
+    We'll build an experiment from scratch using real data from our dataio platform.
+    
+    \vspace{1.5em}
+    \textbf{Follow along later:}
+    \url{https://github.com/dsih-artpark/example.git}
+    \end{frame}
+
+\begin{frame}[fragile]{Git Commands Reference}
+    \begin{description}
+        \item[\texttt{git status}] Check current state - see what changed
+        
+        \item[\texttt{git add <file>}] Stage file for commit \\
+        \textcolor{gray}{\textit{Example: \texttt{git add eda.py}}}
+        
+        \item[\texttt{git commit -m "..."}] Save checkpoint with message \\
+        \textcolor{gray}{\textit{Example: \texttt{git commit -m "Add EDA"}}}
+        
+        \item[\texttt{git log --oneline}] View commit history (your checkpoints)
+        
+        \item[\texttt{git checkout <hash>}] Go back to a previous commit \\
+        \textcolor{gray}{\textit{Example: \texttt{git checkout abc123}}}
+        
+        \item[\texttt{git diff}] See what changed between versions
+    \end{description}
+    
+    \vspace{1em}
+    \centering
+    \textit{Keep this visible during demo - you'll see these in action}
+    \end{frame}
+
+\begin{frame}[fragile]{The Structure}
+\begin{lstlisting}
+README.md
+.gitignore
+.env
+.python-version
+pyproject.toml
+uv.lock
+config.yaml
+data/
+outputs/
+src/example/experiments/
+    └── 2025-12-18-eda/
+        ├── README.md
+        ├── __init__.py
+        └── eda.py
+\end{lstlisting}
+
+\normalsize
+This simple structure can help you keep your experiments organised and reproducible.
+\end{frame}
+
+\begin{frame}{Demo Plan: What You'll See}
+    \textbf{I'll walk through a real workflow:}
+    
+    \vspace{0.5em}
+    \begin{enumerate}
+        \item \textbf{Setup:} Repo structure already created
+        \item \textbf{First experiment:} Run EDA on FMD vaccination data
+        \item \textbf{Commit:} Save checkpoint with meaningful message
+        \item \textbf{Iterate:} Run spatial analysis, calculate coverage
+        \item \textbf{Break \& fix:} Make a mistake → recover with git
+        \item \textbf{Collaborate:} Show how Adish can reproduce my exact work
+        \item \textbf{Linear:} Quick look at organizational layer
+    \end{enumerate}
+    
+    \vspace{0.5em}
+    \textit{Watch the workflow, not the code. We'll extract principles after.}
+    \end{frame}
+
+\begin{frame}{Demo: Watch the Workflow}
+\Large
+\textit{[Live coding session]}
+
+\vspace{2em}
+\normalsize
+Installing dataio → Setting up → First run → Iterate → Break \& fix → Collaborate
+\end{frame}
+
+% ============================================
+% SECTION 3: PRINCIPLES
+% ============================================
+\section{Lessons Learnt}
+
+\begin{frame}{Lessons Learnt from the Demo}
+\Large
+Let's work to extract what made that workflow work
+\end{frame}
+
+\begin{frame}[fragile]{Principle 1: Commit Discipline}
+\textbf{Commits = Time Machine Checkpoints}
+
+\vspace{1em}
+When to commit:
+\begin{itemize}
+    \item After each meaningful change
+    \item Not every keystroke, not once a month
+\end{itemize}
+
+\vspace{1em}
+Good commit message:
+\begin{lstlisting}
+Increased window size to 14 days - RMSE dropped to 0.82
+\end{lstlisting}
+
+\vspace{0.5em}
+Your future self will thank you.
+\end{frame}
+
+\begin{frame}{Principle 2: Structure Discipline}
+\textbf{Reproducible Experiments by Design}
+
+\vspace{1em}
+Key elements:
+\begin{itemize}
+    \item Config-driven (no hardcoded parameters)
+    \item Consistent naming (\texttt{experiments/YYYY-MM-DD-description/})
+    \item README documents intent
+    \item Separation: data / experiments / results
+\end{itemize}
+
+\vspace{1em}
+\textit{Structure = clarity of thought}
+\end{frame}
+
+\begin{frame}[fragile]{Principle 3: Recovery Discipline}
+\textbf{Fearless Iteration}
+
+\vspace{1em}
+You saw:
+\begin{lstlisting}
+# Made it worse? No problem.
+git checkout <previous-commit>
+# Back to good state in 3 seconds
+\end{lstlisting}
+
+\vspace{1em}
+This means:
+\begin{itemize}
+    \item Experiment boldly
+    \item Tag important milestones
+    \item Never fear breaking things
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Systems Thinking → Better Science}
+\Large
+Why this matters beyond git:
+
+\vspace{1em}
+\normalsize
+\begin{itemize}
+    \item Clear mental model of your work
+    \item Better collaboration with tools (LLMs)
+    \item Human-in-the-loop stays central
+    \item More time for actual thinking, less firefighting
+\end{itemize}
+
+\vspace{1em}
+\textit{Chat with Claude about your experiments. \\
+Don't blindly hand off.}
+\end{frame}
+
+\begin{frame}{The Cherry on Top: Linear}
+\textbf{Organizational Layer}
+
+\vspace{1em}
+\begin{itemize}
+    \item Link commits to work tickets
+    \item Track progress across team
+    \item Integrate with planning cycles
+\end{itemize}
+
+\vspace{1em}
+\textit{We'll dive deeper in a future workshop.}
+\end{frame}
+
+% ============================================
+% SECTION 4: NEXT STEPS
+% ============================================
+\section{Next Steps}
+
+\begin{frame}{What You Get Today}
+    \textbf{Resources:}
+    \begin{itemize}
+        \item \textbf{SoP:} Published to Knowledge Base
+        \item \textbf{Repo template:} Manual guide (cookiecutter Jan 2026)
+        \item \textbf{Git cheat sheet:} In this presentation
+        \item \textbf{Example repo:} FMD demo you just saw
+    \end{itemize}
+    
+    \vspace{1em}
+    \textbf{Support:}
+    \begin{itemize}
+        \item \textbf{Office hours:} Tue 2-4pm, Thu 10-12pm
+        \item Don't struggle alone - come with questions!
+    \end{itemize}
+    \end{frame}
+
+    \begin{frame}{Your Action Item for Monday}
+        \Large
+        Start small. One experiment.
+        
+        \vspace{1em}
+        \normalsize
+        \textbf{Step 1:} Create ONE experiment repo using the template
+        
+        \textbf{Step 2:} Run ONE analysis with git commits after each step
+        
+        \textbf{Step 3:} Bring questions to Tuesday office hours (2-4pm)
+        
+        \vspace{2em}
+        \large
+        That's it. Don't overthink it.
+        \end{frame}
+
+\begin{frame}{Your Timeline: Now → March 2026}
+\textbf{This Month (Dec 2025):}
+\begin{itemize}
+    \item Try this workflow for ONE experiment
+    \item Come to office hours if stuck
+    \item Share what worked/didn't in Slack
+\end{itemize}
+
+\vspace{1em}
+\textbf{March 2026:}
+\begin{itemize}
+    \item Official policy for dengue team (then org-wide)
+    \item Code review gates active
+    \item Linear integration required
+\end{itemize}
+
+\vspace{1em}
+\textit{Early adopters have 3 months of practice. \\
+Get ahead of the curve!}
+\end{frame}
+
+\begin{frame}{Next Workshops}
+\textbf{Session 2:} Documentation Best Practices
+\begin{itemize}
+    \item Guides vs references
+    \item Auto-generate from git history
+    \item Tools: Sphinx, MyST, Starlight, GitHub Pages
+\end{itemize}
+
+\vspace{1em}
+\textbf{Session 3:} Advanced Experiment Tracking
+\begin{itemize}
+    \item Branching strategies
+    \item Migrating existing messy projects
+    \item Complex collaboration workflows
+\end{itemize}
+
+\vspace{1em}
+\textbf{Session 4:} Deep dive into Linear integration
+\end{frame}
+
+\begin{frame}{The Alternative: Life Without This System}
+    \begin{columns}
+    \column{0.48\textwidth}
+    \textbf{Without Git \& Structure:}
+    \begin{itemize}
+        \item Lost experiments
+        \item "Which parameters worked?"
+        \item Can't reproduce for papers
+        \item Fear of breaking things
+        \item Firefighting chaos
+    \end{itemize}
+    
+    \column{0.48\textwidth}
+    \textbf{With This System:}
+    \begin{itemize}
+        \item Time machine for work
+        \item Clear experiment history
+        \item Reproducible science
+        \item Fearless iteration
+        \item Focus on thinking
+    \end{itemize}
+    \end{columns}
+    
+    \vspace{1em}
+    \centering
+    \textit{This isn't extra work. It's how you save yourself.}
+    \end{frame}
+
+\begin{frame}{Remember}
+\Large
+This isn't about rules.
+
+\vspace{1em}
+\normalsize
+It's about \textbf{self-preservation} and \textbf{better science}.
+
+\vspace{2em}
+\large
+These aren't constraints - they're leverage points.
+\end{frame}
+
+\begin{frame}{Questions?}
+\begin{center}
+\Large
+Let's discuss!
+
+\vspace{2em}
+\normalsize
+Office Hours: Tue 2-4pm, Thu 10-12pm \\
+Reach out: Sneha or Adish
+\end{center}
+\end{frame}
+
+\end{document}

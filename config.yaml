@@ -1,0 +1,32 @@
+meta:
+  directories:
+    data: data/
+    outputs: outputs/
+    src: src/
+    experiments: experiments/
+    results: results/
+    plots: plots/
+
+experiments:
+  eda-baseline:
+    date_created: 2025-12-18
+    datasets:
+      - 86 # NDLM Bharat Pashudhan FMD Vaccinations
+      - 41 # 20th Livestock Census
+    files:
+      vax: EP0006DS0086-NDLM_Bharat_Pashudhan_FMD_Vaccinations/fmd_vaccinations.csv
+    parameters:
+      parameter_1: value_1
+      parameter_2: value_2
+  moran-spatial-autocorrelation:
+    date_created: 2025-12-18
+    datasets:
+      - 86 # NDLM Bharat Pashudhan FMD Vaccinations
+      - 41 # 20th Livestock Census
+    files:
+      vax: EP0006DS0086-NDLM_Bharat_Pashudhan_FMD_Vaccinations/fmd_vaccinations.csv
+      population: CS0007DS0041-20th_Livestock_Census/ka-district-livestock-pop-2019.csv
+      ka_districts_geojson: shapefiles/karnataka_districts.geojson
+    parameters:
+      parameter_1: value_1
+      parameter_2: value_2

@@ -1,0 +1,31 @@
+[project]
+name = "example"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dataio-artpark>=0.4.0b14",
+    "esda>=2.8.0",
+    "geopandas>=1.1.1",
+    "libpysal>=4.13.0",
+    "matplotlib>=3.10.8",
+    "pandas>=2.3.3",
+    "pyyaml>=6.0.3",
+    "seaborn>=0.13.2",
+    "splot>=1.1.7",
+]
+license = {file = "LICENSE"}
+authors = [
+    {name = "Sneha", email = "hello@saisneha.com"},
+    {name = "Adish", email = "adishai99@gmail.com"},
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+get_data = "example.get_data:main"
+eda-baseline = "example.experiments.eda_baseline.eda:main"
+moran-spatial = "example.experiments.moran_spatial_autocorrelation.auto_correlation:main"
