@@ -30,6 +30,11 @@ Before you do, ensure you have the dataio client configured. To do this, have yo
 uv run dataio init
 ```
 
+This will automatically create an .env file in the root of the repository.
+
+> [!NOTE]
+> The .env file is used to store the dataio API key. It is not committed to the repository.
+
 Once this is done, you can run the script to fetch the data:
 
 ```bash
@@ -40,3 +45,17 @@ One data file, the karnataka_districts.geojson, needs to be manually obtained fr
 
 > [!NOTE]
 > This is a one-time setup. And don't worry about data being replicated across experiments. The script is set up to only download the data once, and then use the local copy for all experiments.
+
+4. Run the experiments
+
+```bash
+uv run eda-baseline
+```
+
+```bash
+uv run moran-spatial
+```
+
+## Results
+
+The plots will be saved in the plots/ directory.
