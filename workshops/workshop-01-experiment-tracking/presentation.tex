@@ -86,18 +86,18 @@
         \item \textbf{Session 1 - Experiment Tracking (Today)} \\
         {\small Git workflows, reproducibility, why it matters}
         
-        \item \textbf{Session 2 - Documentation Best Practices (Tentative: Jan 2026)} \\
+        \item \textbf{Session 2 - Documentation Best Practices (Jan 2026)} \\
         {\small Guides vs references, auto-generation, publishing}
         
-        \item \textbf{Session 3 - Advanced Experiment Tracking (Tentative: Jan 2026)} \\
-        {\small Branching, migration, complex workflows}
+        \item \textbf{Session 3 - Advanced Experiment Tracking (Jan 2026)} \\
+        {\small Branching, migration, complex workflows, secrets management}
         
-        \item \textbf{Session 4 - Linear Integration (Tentative: Feb 2026)} \\
-        {\small Connecting experiments to team planning}
+        \item \textbf{Session 4 - Linear Integration (Feb 2026)} \\
+        {\small Connecting experiments to team planning, linear integration}
     \end{enumerate}
     
     \vspace{0.5em}
-    \textit{Each session will build on the previous. The intention is to level up progressively.}
+    \textit{Each session will build on the previous. The intention is to go slow and level up progressively.}
 \end{frame}
 
 
@@ -116,20 +116,25 @@ Raise your hand if you've experienced any of the following:
 \begin{itemize}
     \item You've lost work or can't reproduce previous results
     \pause
-    \item Colleague asks to reproduce your analysis - you have an idea of what you did but can't remember exactly.
+    \item A colleague asks to reproduce your analysis - you have an idea of what you did but can't remember exactly, or you're not sure if you did it correctly.
     \pause
-    \item Broke something and wished for an undo button.
+    \item You broke something and wished for an undo button.
 \end{itemize}
 \end{frame}
 
 \begin{frame}{These Aren't Just Frustrations}
 \Large
-They're symptoms of \textbf{missing systems}
+They're symptoms of \textbf{missing systems}. Systems on how to work with data, run experiments, and save and share results.
 
 \vspace{2em}
 
 \normalsize
-Good news: We can fix this.
+The good news? We can fix this.
+
+\vspace{2em}
+
+\normalsize
+Today, we'll learn how to use git to track experiments, and how to make your experiments reproducible and shareable.
 \end{frame}
 
 \begin{frame}{Today's Journey}
@@ -210,7 +215,7 @@ This simple structure can help you keep your experiments organised and reproduci
     \vspace{0.5em}
     \begin{enumerate}
         \item \textbf{Setup:} Repo structure already created
-        \item \textbf{First experiment:} Run EDA on FMD vaccination data
+        \item \textbf{First experiment:} Run through various aspects of the experiment
         \item \textbf{Commit:} Save checkpoint with meaningful message
         \item \textbf{Iterate:} Run spatial analysis, calculate coverage
         \item \textbf{Break \& fix:} Make a mistake → recover with git
@@ -222,15 +227,6 @@ This simple structure can help you keep your experiments organised and reproduci
     \textit{Watch the workflow, not the code. We'll extract principles after.}
     \end{frame}
 
-\begin{frame}{Demo: Watch the Workflow}
-\Large
-\textit{[Live coding session]}
-
-\vspace{2em}
-\normalsize
-Installing dataio → Setting up → First run → Iterate → Break \& fix → Collaborate
-\end{frame}
-
 % ============================================
 % SECTION 3: PRINCIPLES
 % ============================================
@@ -238,7 +234,7 @@ Installing dataio → Setting up → First run → Iterate → Break \& fix → 
 
 \begin{frame}{Lessons Learnt from the Demo}
 \Large
-Let's work to extract what made that workflow work
+Let's work to extract what made that workflow work.
 \end{frame}
 
 \begin{frame}[fragile]{Principle 1: Commit Discipline}
@@ -258,7 +254,7 @@ Increased window size to 14 days - RMSE dropped to 0.82
 \end{lstlisting}
 
 \vspace{0.5em}
-Your future self will thank you.
+You don't need to push every time you commit! So you can make commits locally, roll them back, anbd push them at the end of the day. Committing is a checkpoint, not a push.
 \end{frame}
 
 \begin{frame}{Principle 2: Structure Discipline}
@@ -268,17 +264,17 @@ Your future self will thank you.
 Key elements:
 \begin{itemize}
     \item Config-driven (no hardcoded parameters)
-    \item Consistent naming (\texttt{experiments/YYYY-MM-DD-description/})
+    \item Consistent naming (\texttt{experiments/description/})
     \item README documents intent
     \item Separation: data / experiments / results
 \end{itemize}
 
 \vspace{1em}
-\textit{Structure = clarity of thought}
+\textit{Structuring your work brings about some clarity of thought, and enables reproducibility and hence collaboration.}
 \end{frame}
 
 \begin{frame}[fragile]{Principle 3: Recovery Discipline}
-\textbf{Fearless Iteration}
+\textbf{Fearless Iteration and Recovery}
 
 \vspace{1em}
 You saw:
@@ -291,28 +287,27 @@ git checkout <previous-commit>
 \vspace{1em}
 This means:
 \begin{itemize}
-    \item Experiment boldly
-    \item Tag important milestones
-    \item Never fear breaking things
+    \item You can always roll back to a previous checkpoint - so experiment away!
+    \item Commit and/or tag important milestones so it's easier to roll back to a previous checkpoint
+    \item Don't worry about breaking things
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Systems Thinking → Better Science}
 \Large
-Why this matters beyond git:
+These principles matter beyond git:
 
 \vspace{1em}
 \normalsize
 \begin{itemize}
-    \item Clear mental model of your work
-    \item Better collaboration with tools (LLMs)
-    \item Human-in-the-loop stays central
+    \item Clear mental model of your work - you know what you've done, and what you've not done
+    \item Codebase is navigatable, for yourself and for others; Less time spent firefighting and reproducing experiments
+    \item Better collaboration with tools (LLMs) while structural decisions come from you; HITL stays central
     \item More time for actual thinking, less firefighting
 \end{itemize}
 
 \vspace{1em}
-\textit{Chat with Claude about your experiments. \\
-Don't blindly hand off.}
+\textit{Chat with LLMs about your experiments. But don't blindly hand off to them.}
 \end{frame}
 
 \begin{frame}{The Cherry on Top: Linear}
@@ -337,23 +332,26 @@ Don't blindly hand off.}
 \begin{frame}{What You Get Today}
     \textbf{Resources:}
     \begin{itemize}
-        \item \textbf{SoP:} Published to Knowledge Base
-        \item \textbf{Repo template:} Manual guide (cookiecutter Jan 2026)
+        \item \textbf{SoP:} Will be published to Knowledge Base. You can refer to this repo as an example, will be notified when it's ready.
+        \item \textbf{Repo template:} A cookiecutter based template will be available in Jan 2026. Until then, you can use this repo as a template.
         \item \textbf{Git cheat sheet:} In this presentation
-        \item \textbf{Example repo:} FMD demo you just saw
     \end{itemize}
     
     \vspace{1em}
     \textbf{Support:}
     \begin{itemize}
-        \item \textbf{Office hours:} Tue 2-4pm, Thu 10-12pm
-        \item Don't struggle alone - come with questions!
+        \item \textbf{Office hours:} Tue 3-5pm, Thu 11-1pm
+        \item Don't struggle alone - come with questions, or to discuss your ideas!
     \end{itemize}
+
+    \vspace{1em}
+    \small
+    \textit{Adish, Prerna, Tarun,and Aishwarya can attest - I am always happy to sit and chat, answer questions, and help you out.}
     \end{frame}
 
     \begin{frame}{Your Action Item for Monday}
         \Large
-        Start small. One experiment.
+        Start small - one experiment.
         
         \vspace{1em}
         \normalsize
@@ -361,11 +359,11 @@ Don't blindly hand off.}
         
         \textbf{Step 2:} Run ONE analysis with git commits after each step
         
-        \textbf{Step 3:} Bring questions to Tuesday office hours (2-4pm)
+        \textbf{Step 3:} Bring questions to Tuesday office hours (3-5pm).
         
         \vspace{2em}
         \large
-        That's it. Don't overthink it.
+        With git specifically, and structured thinking in general, the key is to avoid overthinking it and start small.
         \end{frame}
 
 \begin{frame}{Your Timeline: Now → March 2026}
@@ -373,14 +371,14 @@ Don't blindly hand off.}
 \begin{itemize}
     \item Try this workflow for ONE experiment
     \item Come to office hours if stuck
-    \item Share what worked/didn't in Slack
+    \item Share what worked/didn't in Slack (\href{https://artpark-in.slack.com/archives/C0638EBD84D}{#technical-support})
 \end{itemize}
 
 \vspace{1em}
 \textbf{March 2026:}
 \begin{itemize}
-    \item Official policy for dengue team (then org-wide)
-    \item Code review gates active
+    \item Official policy for dengue team (then org-wide) - will be notified when it's ready.
+    \item Code review gates will be created.
     \item Linear integration required
 \end{itemize}
 
@@ -403,10 +401,15 @@ Get ahead of the curve!}
     \item Branching strategies
     \item Migrating existing messy projects
     \item Complex collaboration workflows
+    \item Secrets management using 1Password
 \end{itemize}
 
 \vspace{1em}
 \textbf{Session 4:} Deep dive into Linear integration
+\begin{itemize}
+    \item Connecting experiments to team planning
+    \item Linear integration with pull requests
+\end{itemize}
 \end{frame}
 
 \begin{frame}{The Alternative: Life Without This System}
@@ -434,7 +437,7 @@ Get ahead of the curve!}
     
     \vspace{1em}
     \centering
-    \textit{This isn't extra work. It's how you save yourself.}
+    \textit{This isn't extra work. It actually helps you reduce firefighting and focus on thinking in the long run.}
     \end{frame}
 
 \begin{frame}{Remember}
@@ -443,11 +446,8 @@ This isn't about rules.
 
 \vspace{1em}
 \normalsize
-It's about \textbf{self-preservation} and \textbf{better science}.
+It's about \textbf{self-preservation} and \textbf{better data science}.
 
-\vspace{2em}
-\large
-These aren't constraints - they're leverage points.
 \end{frame}
 
 \begin{frame}{Questions?}
@@ -457,8 +457,9 @@ Let's discuss!
 
 \vspace{2em}
 \normalsize
-Office Hours: Tue 2-4pm, Thu 10-12pm \\
-Reach out: Sneha or Adish
+Sneha's Office Hours: Tue 3-5pm, Thu 11-1pm \\
+Adish's Office Hours: Ad-hoc, by appointment \\
+Reach out! We're here to help.
 \end{center}
 \end{frame}
 

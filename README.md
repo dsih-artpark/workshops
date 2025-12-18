@@ -5,8 +5,8 @@ This repository is a template for the workshop on experiment tracking. It is a s
 ## System Level Requirements
 
 - git (https://git-scm.com/)
-- Python (https://www.python.org/)
 - uv (https://docs.astral.sh/uv/)
+- Python (https://www.python.org/ (Optional, uv will install it for you))
 
 ## Usage
 
@@ -58,4 +58,4 @@ uv run moran-spatial
 
 ## Results
 
-The plots will be saved in the plots/ directory.
+The plots will be saved in the `plots/<experiment-name>/` directory.

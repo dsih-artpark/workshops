@@ -153,7 +153,7 @@ data/
 processed-data/
 outputs/
 plots/
-config.yaml.
+!config.yaml
 
 
 # Repo Specific
