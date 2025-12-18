@@ -1,18 +1,13 @@
 meta:
   directories:
     data: data/
-    outputs: outputs/
-    src: src/
-    experiments: experiments/
-    results: results/
     plots: plots/
 
 experiments:
   eda-baseline:
     date_created: 2025-12-18
-    datasets:
+    datasets: # dataio dataset IDs
       - 86 # NDLM Bharat Pashudhan FMD Vaccinations
-      - 41 # 20th Livestock Census
     files:
       vax: EP0006DS0086-NDLM_Bharat_Pashudhan_FMD_Vaccinations/fmd_vaccinations.csv
     parameters:
