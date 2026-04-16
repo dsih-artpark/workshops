@@ -1,4 +1,13 @@
-# Example Repository for the Workshop on Experiment Tracking
+# DSIH-ARTPARK Workshop Repository
+
+This repository contains materials for all workshops in this series, including slide decks, source files, and supporting assets.
+
+## Available Workshop PDFs
+
+1. [Workshop 1: Experiment Tracking](workshops/workshop-01-experiment-tracking/presentation.pdf)
+2. [Workshop 2: Gen AI Workflows](workshops/workshop-02-gen-ai-workflows-01/presentation.pdf)
+
+## Workshop 1: Experiment Tracking
 
 This repository is a template for the workshop on experiment tracking. It is a simple example of how to use git to track experiments.
 
